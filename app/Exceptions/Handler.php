@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use ErrorException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use InvalidArgumentException;
+use ParseError;
 use Symfony\Component\ErrorHandler\Error\FatalError;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -56,37 +59,46 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if($exception instanceof FatalError || $exception instanceof QueryException || $exception instanceof InvalidArgumentException){
-            $message = "Sorry! We are unable to process your request at this moment. Try again later";
-            return $this->errorResponse(Response::HTTP_INTERNAL_SERVER_ERROR, $message);
-        }
         if($exception instanceof MethodNotAllowedHttpException){
             $message = "The URL you are trying to access is not correct. Please contact the website administrator for assistance";
-            return $this->errorResponse(Response::HTTP_METHOD_NOT_ALLOWED, $message);
+            return $this->sendResponse($message, Response::HTTP_METHOD_NOT_ALLOWED);
         }
         if($exception instanceof NotFoundHttpException){
-            return $this->errorResponse(Response::HTTP_NOT_FOUND, $exception->getMessage());
+            return $this->sendResponse($exception->getMessage(), Response::HTTP_NOT_FOUND);
         }
-        if($exception instanceof AuthenticationException){
-            return $this->errorResponse(Response::HTTP_UNAUTHORIZED, $exception->getMessage());
+        if($exception instanceof AuthenticationException || $exception instanceof AuthorizationException){
+            $message = "Access denied! You are not authorized to perform this action";
+            return $this->sendResponse($message, Response::HTTP_UNAUTHORIZED);
+        }
+        if($exception instanceof FatalError 
+            || $exception instanceof QueryException 
+            || $exception instanceof InvalidArgumentException
+            || $exception instanceof ErrorException
+            || $exception instanceof ParseError
+        ){
+            $message = "Sorry! There was a problem processing your request. Please try again later";
+            return $this->sendResponse($message, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         return parent::render($request, $exception);
     }
 
     /**
+     * @param string $message
      * @param integer $statusCode
-     * @param string|null $message
      * @param array|null $errors
      * @return JsonResponse
      */
-    protected function errorResponse(int $statusCode, ?string $message, ?array $errors = []): JsonResponse
+    protected function sendResponse(string $message, int $statusCode, ?array $errors = []): JsonResponse
     {
-        return response()->json([
-            'success' => false,
-            'status' => $statusCode,
-            'message' => $message,
-            'errors' => $errors,
+        $response = [
+            'success'   => false,
+            'status'    => $statusCode,
+            'message'   => $message,
             'timestamp' => now()
-        ], $statusCode);
+        ];
+        if(!empty($errors)){
+            $response['errors'] = $errors;
+        }
+        return response()->json($response, $statusCode);
     }
 }

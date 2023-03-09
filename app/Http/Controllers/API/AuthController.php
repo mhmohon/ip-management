@@ -20,15 +20,15 @@ class AuthController extends BaseController
 
     public function login(LoginRequest $request): JsonResponse
     {
-        $credentials = $request->safe()->only('email', 'password');
+        $credentials = $request->only('email', 'password');
         try {
             $data = $this->authService->login($credentials);
             if (isset($data['token'])) {
-                return $this->successResponse(Response::HTTP_OK, 'User signed in successfully', $data);
+                return $this->successResponse( 'User signed in successfully', $data);
             }
-            return $this->errorResponse(Response::HTTP_UNAUTHORIZED, "Unauthorised! Credentials doesn't match");
+            return $this->errorResponse( "Unauthorised! Credentials do not match", Response::HTTP_UNAUTHORIZED);
         } catch (Exception $e) {
-            return $this->errorResponse(Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
+            return $this->errorResponse( $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -38,6 +38,6 @@ class AuthController extends BaseController
     public function logout(): JsonResponse
     {
         request()->user()->currentAccessToken()->delete();
-        return $this->successResponse(Response::HTTP_OK, 'User signed out successfully');
+        return $this->successResponse( 'User signed out successfully');
     }
 }

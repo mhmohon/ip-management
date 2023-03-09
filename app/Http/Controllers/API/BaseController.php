@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller as Controller;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class BaseController extends Controller
 {
     /**
+     * @param string $message
+     * @param mixed $payload
      * @param integer $statusCode
-     * @param string|null $message
-     * @param array|null $payload
      * @return JsonResponse
      */
-    protected function successResponse(int $statusCode, ?string $message, ?array $payload = []): JsonResponse
+    protected function successResponse(string $message, mixed $payload = [], int $statusCode = Response::HTTP_OK): JsonResponse
     {
         $response = [
             'success'   => true,
@@ -27,12 +28,12 @@ class BaseController extends Controller
     }
 
     /**
+     * @param string $message
      * @param integer $statusCode
-     * @param string|null $message
      * @param array|null $errors
      * @return JsonResponse
      */
-    protected function errorResponse(int $statusCode, ?string $message, ?array $errors = []): JsonResponse
+    protected function errorResponse(string $message, int $statusCode, ?array $errors = []): JsonResponse
     {
         $response = [
             'success'   => false,

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('ip_addresses', function (Blueprint $table) {
             $table->id();
-            $table->string("title", 150);
-            $table->binary("ip_address");
+            $table->string("label", 150);
+            $table->binary("ip_address", 16);
             $table->foreignId("user_id")->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });

@@ -7,17 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class IpAddress extends Model
+class IPAddress extends Model
 {
     use HasFactory;
-    protected $guarded = ["id"];
+    protected $table = "ip_addresses";
+    protected $fillable = ['label', 'ip_address', 'user_id'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, "user_id");
     }
-    public function ip_address_activities(): HasMany
-    {
-        return $this->hasMany(IpAddressActivity::class);
-    }
+    
+    // public function ip_address_activities(): HasMany
+    // {
+    //     return $this->hasMany(IpAddressActivity::class);
+    // }
 }

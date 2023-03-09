@@ -43,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function ip_addresses(): HasMany
+    public function ipAddresses(): HasMany
     {
-        return $this->hasMany(IpAddress::class);
+        return $this->hasMany(IPAddress::class);
     }
 }

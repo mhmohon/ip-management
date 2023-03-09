@@ -2,8 +2,6 @@
 
 namespace App\Services\Contracts;
 
-use Illuminate\Http\JsonResponse;
-
 interface AuthServiceInterface
 {
     /**

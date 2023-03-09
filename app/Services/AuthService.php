@@ -2,12 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Http\Resources\UserResource;
 use App\Services\Contracts\AuthServiceInterface;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Hash;
 
 class AuthService implements AuthServiceInterface
 {
@@ -20,7 +17,7 @@ class AuthService implements AuthServiceInterface
         if(Auth::guard('web')->attempt($credentials)){
             $authUser = Auth::guard('web')->user(); 
             $res['token'] =  $authUser->createToken('ipAddressAuth')->plainTextToken; 
-            $res['user'] =  $authUser;
+            $res['user'] =  new UserResource($authUser);
             return $res;
         }
         return false;

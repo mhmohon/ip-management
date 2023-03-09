@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\IPAddressController;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::fallback(function () {
+    throw new NotFoundHttpException("Error Processing Request");
+})->name('api.fallback.404');
 
 Route::get("/login", function(){
     return "IP Management";
@@ -21,7 +26,8 @@ Route::get("/login", function(){
 Route::post('/login', [AuthController::class, 'login'])->name('api.signin');
 
 Route::middleware('auth:sanctum')->group( function () {
-
+    // logout authenticated  user
     Route::post('/logout',[AuthController::class, 'logout'])->name('api.signout');
-    // Route::resource('blogs', BlogController::class);
+    // For IP address Create / Update/ View
+    Route::resource('/ip-address', IPAddressController::class, ['except' => ['create','destroy', 'show', 'edit']]);
 });

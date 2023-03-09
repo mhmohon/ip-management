@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Services\AuthService;
 use App\Services\Contracts\AuthServiceInterface;
+use App\Services\Contracts\IPAddressServiceInterface;
+use App\Services\IPAddressService;
 use Illuminate\Support\ServiceProvider;
 
 class ServicePatternProvider extends ServiceProvider
@@ -14,6 +16,7 @@ class ServicePatternProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
+        $this->app->bind(IPAddressServiceInterface::class, IPAddressService::class);
     }
 
     /**

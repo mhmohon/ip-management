@@ -2,15 +2,17 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class TaskRequest extends FormRequest
+class IPAddressRequest extends BaseAPIFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
+        if (request()->isMethod('PUT') || request()->isMethod('PATCH')) {
+            $ipAddress = $this->route('ip_address');
+            return $ipAddress->user_id === auth()->user()->id;
+        }
         return true;
     }
 
@@ -21,17 +23,22 @@ class TaskRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "name" => "required",
-            "todo_id" => "required|numeric|exists:todos,id",
+        $rules = [
+            "label" => "required|min:3",
         ];
+        if (request()->isMethod('POST')) {
+            $rules = [
+                "label" => "required|min:3",
+                "ip_address" => "required|ip",
+            ];
+        }
+        return $rules;
     }
 
     public function messages()
     {
         return [
-            "todo_id.numeric" => "Your selected todo is not valid",
-            "todo_id.exists" => "Your selected todo is not exist"
+            "ip_address.ip" => "Please use correct IP Address"
         ];
     }
 }
