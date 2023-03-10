@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Actions\StoreAuditLog;
 use App\Http\Resources\IPAddressCollection;
 use App\Http\Resources\IPAddressResource;
 use App\Models\IPAddress;
@@ -28,27 +29,27 @@ class IPAddressService implements IPAddressServiceInterface
     /**
      * @param User $user
      * @param array $requestData
-     * @return IPAddressResource
+     * @return IPAddress
      */
-    public function create(User $user, array $requestData): IPAddressResource
+    public function create(User $user, array $requestData): IPAddress
     {
         $ipAddress = $user->ipAddresses()->create([
             'label'         => $requestData['label'],
             'ip_address'    => $this->convertToBinary($requestData['ip_address']),
         ]);
-        return new IPAddressResource($ipAddress);
+        return $ipAddress;
     }
 
     /**
      * @param User $user
      * @param array $requestData
-     * @return IPAddressResource
+     * @return IPAddress
      */
-    public function modifyFetch(User $user, array $requestData, IPAddress $ipAddress): IPAddressResource
+    public function modifyFetch(User $user, array $requestData, IPAddress $ipAddress): IPAddress
     {
         $ipAddress->update([
             'label' => $requestData['label']
         ]);
-        return new IPAddressResource($ipAddress);
+        return $ipAddress;
     }
 }

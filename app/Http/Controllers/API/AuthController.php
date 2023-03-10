@@ -5,16 +5,16 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\LoginRequest;
 use App\Services\Contracts\AuthServiceInterface;
 use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends BaseController
 {
-    private AuthServiceInterface $authService;
 
-    public function __construct(AuthServiceInterface $authService)
+    public function __construct(private AuthServiceInterface $authService)
     {
-        $this->authService = $authService;
         $this->middleware('guest')->except('logout');
     }
 
@@ -27,8 +27,10 @@ class AuthController extends BaseController
                 return $this->successResponse( 'User signed in successfully', $data);
             }
             return $this->errorResponse( "Unauthorised! Credentials do not match", Response::HTTP_UNAUTHORIZED);
-        } catch (Exception $e) {
-            return $this->errorResponse( $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (QueryException $e) {
+            // If there was an error fetching the IP addresses (e.g. a database error), log the error and return an error response.
+            Log::error("Database query failed: {$e->getMessage()}");
+            return $this->errorResponse("Failed to sign in", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 

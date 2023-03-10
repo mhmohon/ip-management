@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 
-class IpAddressCollection extends BaseCollection
+class AuditLogCollection extends BaseCollection
 {
     /**
      * Transform the resource into an array.
@@ -14,8 +14,8 @@ class IpAddressCollection extends BaseCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => IPAddressResource::collection($this->collection),
-            'link' => url('/ip-address'),
+            'data' => AuditLogResource::collection($this->collection),
+            'link' => url('/api/auditlog'),
             'total' => $this->collection->count(),
         ];
     }

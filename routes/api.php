@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuditLogController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\IPAddressController;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,6 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('/logout',[AuthController::class, 'logout'])->name('api.signout');
     // For IP address Create / Update/ View
     Route::resource('/ip-address', IPAddressController::class, ['except' => ['create','destroy', 'show', 'edit']]);
+    // For all audit lists
+    Route::get('/auditlogs',[AuditLogController::class, 'index'])->name('api.auditlogs');
 });

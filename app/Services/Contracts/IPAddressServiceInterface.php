@@ -3,10 +3,8 @@
 namespace App\Services\Contracts;
 
 use App\Http\Resources\IpAddressCollection;
-use App\Http\Resources\IPAddressResource;
 use App\Models\IPAddress;
 use App\Models\User;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
 interface IPAddressServiceInterface
 {
@@ -19,14 +17,14 @@ interface IPAddressServiceInterface
     /**
      * @param array $reqestData
      * @param integer $userID
-     * @return IPAddressResource
+     * @return IPAddress
      */
-    public function create(User $user, array $requestData): IPAddressResource;
+    public function create(User $user, array $requestData): IPAddress;
 
     /**
      * @param array $reqestData
      * @param integer $userID
-     * @return IPAddressResource
+     * @return IPAddress
      */
-    public function modifyFetch(User $user, array $requestData, IPAddress $ipAddress): IPAddressResource;
+    public function modifyFetch(User $user, array $requestData, IPAddress $ipAddress): IPAddress;
 }

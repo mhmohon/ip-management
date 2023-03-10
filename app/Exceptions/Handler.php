@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use ErrorException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
@@ -62,6 +63,10 @@ class Handler extends ExceptionHandler
         if($exception instanceof MethodNotAllowedHttpException){
             $message = "The URL you are trying to access is not correct. Please contact the website administrator for assistance";
             return $this->sendResponse($message, Response::HTTP_METHOD_NOT_ALLOWED);
+        }
+        if($exception instanceof ModelNotFoundException){
+            $message = "The data you entered did not match any records in our database";
+            return $this->sendResponse($message, Response::HTTP_NOT_FOUND);
         }
         if($exception instanceof NotFoundHttpException){
             return $this->sendResponse($exception->getMessage(), Response::HTTP_NOT_FOUND);

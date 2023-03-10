@@ -18,8 +18,8 @@ class IPAddress extends Model
         return $this->belongsTo(User::class, "user_id");
     }
     
-    // public function ip_address_activities(): HasMany
-    // {
-    //     return $this->hasMany(IpAddressActivity::class);
-    // }
+    public function auditLogs(): HasMany
+    {
+        return $this->hasMany(AuditLogs::class);
+    }
 }

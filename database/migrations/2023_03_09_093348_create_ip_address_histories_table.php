@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ip_address_activities', function (Blueprint $table) {
+        Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
-            $table->string("title", 150);
-            $table->binary("ip_address");
-            $table->foreignId("ip_address_id")->constrained('ip_addresses')->cascadeOnDelete();
+            $table->string('event')->nullable();
+            $table->string('description');
+            $table->integer('auditable_id')->nullable();
+            $table->string('auditable_type')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->string('user_type')->nullable();
+            $table->json('properties')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ip_address_activities');
+        Schema::dropIfExists('audit_logs');
     }
 };

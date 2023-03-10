@@ -22,5 +22,4 @@ class AuthService implements AuthServiceInterface
         }
         return false;
     }
-
 }
