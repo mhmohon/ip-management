@@ -25,6 +25,7 @@
 </template>
 <script>
 import {useRouter} from "vue-router";
+import {request} from '../helper'
 
 export default {
     data() {
@@ -35,9 +36,16 @@ export default {
     setup() {
         let router = useRouter();
 
-        const handleLogout = () => {
-            localStorage.removeItem('APP_USER_TOKEN')
-            router.push('/')
+        const handleLogout = async () => {
+            try {
+                const req = await request("post", "/api/logout", [])
+                if (req.status === 200 && req.data.success == true) {
+                    localStorage.removeItem('APP_USER_TOKEN')
+                    await router.push({ name: 'login' })
+                }
+            } catch (e) {
+                await router.push('/')
+            }
         }
         return {
             handleLogout,

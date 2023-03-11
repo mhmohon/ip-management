@@ -112,7 +112,7 @@ Please check the official laravel installation guide for server requirements bef
 
 You can now access the server at http://localhost:8000
 
-** Now you have to setup the front application. Create another terminal in same directory and run following command.**
+**Now you have to setup the front application. Create another terminal in same directory and run following command.**
 1. Install NPM packages
 
         npm install
