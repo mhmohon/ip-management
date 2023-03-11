@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Resources\IpAddressCollection;
+use App\Http\Resources\IPAddressCollection;
 use App\Models\IPAddress;
 use App\Models\User;
 use App\Services\Contracts\IPAddressServiceInterface;
@@ -14,14 +14,14 @@ class IPAddressService implements IPAddressServiceInterface
 
     /**
      * @param int $userID
-     * @return IpAddressCollection
+     * @return IPAddressCollection
      */
-    public function fetch(int $userID): IpAddressCollection
+    public function fetch(int $userID): IPAddressCollection
     {
         $ipAddress = IPAddress::where("user_id", $userID)
                                 ->latest()
                                 ->get();
-        return new IpAddressCollection($ipAddress);
+        return new IPAddressCollection($ipAddress);
     }
 
     /**

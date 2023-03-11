@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 
-class IpAddressCollection extends BaseCollection
+class IPAddressCollection extends BaseCollection
 {
     /**
      * Transform the resource into an array.

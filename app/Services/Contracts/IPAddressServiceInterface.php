@@ -2,7 +2,7 @@
 
 namespace App\Services\Contracts;
 
-use App\Http\Resources\IpAddressCollection;
+use App\Http\Resources\IPAddressCollection;
 use App\Models\IPAddress;
 use App\Models\User;
 
@@ -10,9 +10,9 @@ interface IPAddressServiceInterface
 {
     /**
      * @param int $userID
-     * @return IpAddressCollection
+     * @return IPAddressCollection
      */
-    public function fetch(int $userID): IpAddressCollection;
+    public function fetch(int $userID): IPAddressCollection;
 
     /**
      * @param User $user

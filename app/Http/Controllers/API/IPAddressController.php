@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\IPAddressRequest;
-use App\Http\Resources\IpAddressCollection;
+use App\Http\Resources\IPAddressCollection;
 use App\Http\Resources\IPAddressResource;
 use App\Models\IPAddress;
 use App\Services\Contracts\IPAddressServiceInterface;
@@ -20,9 +20,9 @@ class IPAddressController extends BaseController
     }
 
    /**
-    * @return IpAddressCollection | JsonResponse
+    * @return IPAddressCollection | JsonResponse
     */
-    public function index(): IpAddressCollection | JsonResponse
+    public function index(): IPAddressCollection | JsonResponse
     {
         // Try to fetch all IP addresses for the current authenticated user.
         try {
