@@ -1,0 +1,66 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Laravel\\\\Sanctum\\\\Contracts\\\\HasAbilities\\:\\:delete\\(\\)\\.$#"
+			count: 1
+			path: app/Http/Controllers/API/AuthController.php
+
+		-
+			message: "#^Cannot call method currentAccessToken\\(\\) on App\\\\Models\\\\User\\|null\\.$#"
+			count: 2
+			path: app/Http/Controllers/API/AuthController.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: app/Http/Controllers/API/AuthController.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Services\\\\Contracts\\\\IPAddressServiceInterface\\:\\:create\\(\\) expects App\\\\Models\\\\User, App\\\\Models\\\\User\\|null given\\.$#"
+			count: 1
+			path: app/Http/Controllers/API/IPAddressController.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of method App\\\\Services\\\\Contracts\\\\IPAddressServiceInterface\\:\\:modifyFetch\\(\\) expects App\\\\Models\\\\User, App\\\\Models\\\\User\\|null given\\.$#"
+			count: 1
+			path: app/Http/Controllers/API/IPAddressController.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Http\\\\Response\\:\\:getData\\(\\)\\.$#"
+			count: 1
+			path: app/Http/Resources/BaseCollection.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Http\\\\Response\\:\\:setData\\(\\)\\.$#"
+			count: 1
+			path: app/Http/Resources/BaseCollection.php
+
+		-
+			message: "#^Parameter \\#2 \\$response \\(Illuminate\\\\Http\\\\Response\\) of method App\\\\Http\\\\Resources\\\\BaseCollection\\:\\:withResponse\\(\\) should be compatible with parameter \\$response \\(Illuminate\\\\Http\\\\JsonResponse\\) of method Illuminate\\\\Http\\\\Resources\\\\Json\\\\JsonResource\\:\\:withResponse\\(\\)$#"
+			count: 1
+			path: app/Http/Resources/BaseCollection.php
+
+		-
+			message: "#^Method App\\\\Models\\\\IPAddress\\:\\:user\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsTo does not specify its types\\: TRelatedModel, TChildModel$#"
+			count: 1
+			path: app/Models/IPAddress.php
+
+		-
+			message: "#^Class App\\\\Models\\\\AuditLogs not found\\.$#"
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: "#^Method App\\\\Models\\\\User\\:\\:auditLogs\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel$#"
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: "#^Method App\\\\Models\\\\User\\:\\:ipAddresses\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel$#"
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: "#^Cannot call method createToken\\(\\) on App\\\\Models\\\\User\\|null\\.$#"
+			count: 1
+			path: app/Services/AuthService.php

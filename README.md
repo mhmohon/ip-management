@@ -18,7 +18,6 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -29,7 +28,6 @@
     <li><a href="#architecture-and-design-pattern">Architecture and Design Pattern</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -38,12 +36,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is an IP address management system where user can add a new IP addresses with a label.
+This is a system that allows users to manage IP addresses by adding and updating labels. It provides an easy-to-use interface for tracking IP addresses and their associated labels. Additionally, the system features an audit log service that records all user actions, providing accountability and traceability for all changes made to the IP address database.
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
+This project is build with these technologies.
 
 [![Vue][Vue.js]][Vue-url]
 [![Laravel][Laravel.com]][Laravel-url]
@@ -64,40 +61,26 @@ This section should list any major frameworks/libraries used to bootstrap your p
 - The application should be well-documented and testable.
 - Write a few test cases to ensure that the API is functioning as expected.
 
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Initial project setup with latest laravel 10
-    - [x] Add all the necessary files (Modals, Migration files). 
-    - [x] Install latest laravel sanctum package for authentication.
-- [x] Add Additional Templates
-- [x] Add Login & logout feature
-    - [x] Write test cases for login & logout feature
-- [x] Add CRU feature for IP address
-    - [x] Complete the frontend Design module
-    - [x] Validated the IP address
-    - [x] Write test cases for this feature
-- [x] Add Audit feature to the system
-    - [x] Complete the frontend Design module
-    - [x] Add Audit logs for logic and change actions
-    - [x] Write test cases for to show audit logs
-- [x] Update the readme file with proper project setup guidline
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Before you can run this Laravel project, you'll need to install the following software:
+
+- PHP v8.1 or later
+- Compo- ser v2.5.4 or later
+- Laravel v10.0 or later
+- MySQL
+- npm v8.5.1 or later
+
+You will also need to set up a MySQL database and configure Laravel to use it. Here's how:
+
+1. Create a new MySQL database foryour project.
+2. Update the **DB_DATABASE**, **DB_USERNAME**, and **DB_PASSWORD** values in the **.env** file to match your MySQL database credentials.
 
 ### Installation
 Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/10.x)
-
-Alternative installation is possible without local dependencies relying on [Docker](#docker).
 
 1. Clone the repo
 
@@ -155,43 +138,49 @@ You can now access the server at http://localhost:8000
 
     npm install
     npm run dev
-	
-
-## Docker
-
-To install with [Docker](https://www.docker.com), run following commands:
-
-	git clone git@github.com:mhmohon/ip-management.git
-	cd ip-management
-	cp .env.example.docker .env
-	docker run -v $(pwd):/app composer install
-	cd ./docker
-	docker-compose up -d
-	docker-compose exec php php artisan key:generate
-	docker-compose exec php php artisan jwt:generate
-	docker-compose exec php php artisan migrate --seed
-	docker-compose exec php php artisan serve --host=0.0.0.0
-
-The api can be accessed at [http://localhost:8000/api](http://localhost:8000/api).
 
 <!-- Architecture and Design Pattern -->
 ## Architecture and Design Pattern
+#### Service Layer Pattern
+I have chosen to use the Service Layer design patterns in my implementation of this application also used the **service interface** layer so that the code will be more abstract and increased testability, which make the application more modular, maintainable, and scalable.
 
-I have chosen to use the Service Layer design patterns in my implementation of this application also used the service interface layer so that the code will be more abstract and increased testability, which make the application more modular, maintainable, and scalable.
+#### Model-Observer Pattern
+For creating audit log service I have used Model-Observer Pattern, to make the code more simplifies code and provide separation of concerns.
 
-<!-- USAGE EXAMPLES -->
-## Usage
+#### Event Service Pattern
+To create audit log for each time user login, I have used this pattern to make the code more scalable.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-For storing an IP address in the database I've used the BINARY(16) field type to store both IPv4 and IPv6 addresses. This requires more storage space but allows for faster indexing and searching of IP addresses.
+#### Other Libraries
+For storing an IP address in the database I have used the BINARY(16) field type to store both IPv4 and IPv6 addresses. This requires more storage space but allows for faster indexing and searching of IP addresses.
 Used the inet_pton function to convert the IP address to its binary representation and stored it.
 Used the inet_ntop function to convert the binary IP address to its human-readable form.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<!-- USAGE EXAMPLES -->
+## Usage
+### Few Screenshots
+##### Login Page
+[![login.png](https://i.postimg.cc/PqXH3QxG/login.png)](https://postimg.cc/870xsWMw)
+##### Home Page
+[![homepage.png](https://i.postimg.cc/G3WHM6nZ/homepage.png)](https://postimg.cc/HjtYnZx2)
+##### Audit Log Page
+[![auditpage.png](https://i.postimg.cc/3NnmGBdK/auditpage.png)](https://postimg.cc/Mffn2174)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+You can run **Unit** test by using this command
+
+		./vendor/bin/pest
+	
+**Result**
+
+![pestImage][pestImage]
+
+You can run **PHPStan** test by using this command
+
+		./vendor/bin/phpstan analyse
+	
+**Result**
+
+![phpstan][phpstan]
 
 
 
@@ -217,3 +206,5 @@ Project Link: [https://github.com/mhmohon/ip-management](https://github.com/mhmo
 [Bootstrap-url]: https://getbootstrap.com
 [tailwindcss.com]: https://img.shields.io/badge/tailwindcss-0769AD?style=for-the-badge&logo=tailwindcss&logoColor=white
 [tailwindcss-url]: https://tailwindcss.com 
+[pestImage]: https://i.ibb.co/GvRCTWM/pest.png
+[phpstan]: https://i.ibb.co/z2d65HY/phpstan.png

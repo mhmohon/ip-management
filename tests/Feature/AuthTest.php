@@ -106,6 +106,19 @@ class AuthTest extends TestCase
             "message" => "Unauthorised! Credentials do not match",
         ]);
     }
+    
+    /**
+     * @test
+     */
+    public function user_cant_logout_without_right_credentials(): void
+    {
+        $response = $this->actingAs($this->user, 'sanctum')->postJson('/api/logout');
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $response->assertJson([
+            "status" => Response::HTTP_UNAUTHORIZED,
+            "success" => false,
+        ]);
+    }
 
     /**
      * @test

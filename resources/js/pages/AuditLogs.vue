@@ -84,7 +84,6 @@ export default {
         const handleAuditLogs = async () => {
             try {
                 const req = await request('get', '/api/auditlogs')
-                console.log(req.data.payload.data);
                 auditLogs.value = req.data.payload.data
             } catch (e) {
                 await router.push('/')

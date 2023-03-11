@@ -8,7 +8,7 @@
         <div class="flex flex-col mt-10">
             <div class="overflow-x-auto">
                 <div class="p-1.5 w-full inline-block align-middle">
-                    <div class="overflow-hidden border rounded-lg">
+                    <div class="border rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
@@ -72,19 +72,8 @@ export default {
 
         let router = useRouter();
         onMounted(() => {
-            authentication()
             handleIpAddresses()
         });
-
-        const authentication = async () => {
-            isLoading.value = true
-            try {
-                const req = await request('get', '/api/user')
-                user.value = req.data
-            } catch (e) {
-                await router.push('/')
-            }
-        }
 
         const handleIpAddresses = async () => {
             try {

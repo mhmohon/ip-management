@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\IPAddressRequest;
 use App\Http\Resources\IpAddressCollection;
 use App\Http\Resources\IPAddressResource;
-use App\Models\IpAddress;
+use App\Models\IPAddress;
 use App\Services\Contracts\IPAddressServiceInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -53,10 +53,10 @@ class IPAddressController extends BaseController
     }
 
     /**
-     * @param IpAddress $ipAddress
+     * @param IPAddress $ipAddress
      * @return IPAddressResource | JsonResponse
      */
-    public function show(IpAddress $ipAddress): IPAddressResource | JsonResponse
+    public function show(IPAddress $ipAddress): IPAddressResource | JsonResponse
     {
         // Try to featch a new IP address for the currently authenticated user using the validated data from the request.
         try {
@@ -73,10 +73,10 @@ class IPAddressController extends BaseController
 
     /**
      * @param IPAddressRequest $request
-     * @param IpAddress $ipAddress
+     * @param IPAddress $ipAddress
      * @return IPAddressResource | JsonResponse
      */
-    public function update(IPAddressRequest $request, IpAddress $ipAddress): IPAddressResource | JsonResponse
+    public function update(IPAddressRequest $request, IPAddress $ipAddress): IPAddressResource | JsonResponse
     {
         // Try to create a new IP address for the currently authenticated user using the validated data from the request.
         try {
@@ -90,10 +90,10 @@ class IPAddressController extends BaseController
     }
 
     /**
-     * @param IpAddress $ipAddress
+     * @param IPAddress $ipAddress
      * @return IPAddressResource
      */
-    public function convertToResource(IpAddress $ipAddress): IPAddressResource
+    public function convertToResource(IPAddress $ipAddress): IPAddressResource
     {
         return new IPAddressResource($ipAddress);
     }

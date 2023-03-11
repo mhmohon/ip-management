@@ -1,0 +1,29 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./phpstan-baseline.neon
+
+parameters:
+
+    paths:
+        - app
+        - tests
+
+    # The level 9 is the highest level
+    level: 8
+
+    ignoreErrors:
+        # errors to be ignored
+        # This is temporary fix to bypass Windows / Linux escaping formating difference
+        - '#^Access to an undefined property#'
+        - '#^Cannot access property#'
+
+    excludePaths:
+         - ./tests
+
+    checkMissingIterableValueType: false
+    parallel:
+        maximumNumberOfProcesses: 1
+
+    earlyTerminatingFunctionCalls:
+    		- redirect
+    		- response

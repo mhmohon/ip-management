@@ -90,7 +90,6 @@ export default {
         }
         const handleEdit = async () => {
             try {
-                console.log(form);
                 const req = await request("put", `/api/ip-address/${ID}`, form)
                 if (req.status === 200 && req.data.success == true) {
                     await router.push({ name: 'home' })

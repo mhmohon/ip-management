@@ -6,7 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Services\Contracts\AuthServiceInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends BaseController
@@ -17,6 +17,10 @@ class AuthController extends BaseController
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return JsonResponse
+     */
     public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
@@ -34,11 +38,20 @@ class AuthController extends BaseController
     }
 
     /**
-     * @return void
+     * @return JsonResponse
      */
     public function logout(): JsonResponse
     {
-        request()->user()->currentAccessToken()->delete();
-        return $this->successResponse( 'User signed out successfully');
+        try {
+            if(request()->user()->currentAccessToken() !== null){
+                request()->user()->currentAccessToken()->delete();
+                return $this->successResponse('User signed out successfully');
+            }
+            return $this->errorResponse("Failed to signed out", Response::HTTP_UNAUTHORIZED);
+        } catch (QueryException $e) {
+            // If there was an error fetching the IP addresses (e.g. a database error), log the error and return an error response.
+            Log::error("Database query failed: {$e->getMessage()}");
+            return $this->errorResponse("Failed to sign in", Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

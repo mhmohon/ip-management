@@ -59,10 +59,10 @@ class IPAddressObserver
 
     /**
      * @param IPAddress $ipAddress
-     * @param [type] $type
+     * @param string $type
      * @return array
      */
-    public function initialValues(IPAddress $ipAddress, $type): array
+    public function initialValues(IPAddress $ipAddress, string $type): array
     {
         $data = [
             'event_name' => ucfirst($type),

@@ -15,15 +15,16 @@ interface IPAddressServiceInterface
     public function fetch(int $userID): IpAddressCollection;
 
     /**
-     * @param array $reqestData
-     * @param integer $userID
+     * @param User $user
+     * @param array $requestData
      * @return IPAddress
      */
     public function create(User $user, array $requestData): IPAddress;
 
     /**
-     * @param array $reqestData
-     * @param integer $userID
+     * @param User $user
+     * @param array $requestData
+     * @param IPAddress $ipAddress
      * @return IPAddress
      */
     public function modifyFetch(User $user, array $requestData, IPAddress $ipAddress): IPAddress;

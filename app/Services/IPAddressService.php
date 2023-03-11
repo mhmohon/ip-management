@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Actions\StoreAuditLog;
-use App\Http\Resources\IPAddressCollection;
-use App\Http\Resources\IPAddressResource;
+use App\Http\Resources\IpAddressCollection;
 use App\Models\IPAddress;
 use App\Models\User;
 use App\Services\Contracts\IPAddressServiceInterface;
@@ -16,14 +14,14 @@ class IPAddressService implements IPAddressServiceInterface
 
     /**
      * @param int $userID
-     * @return IPAddressCollection
+     * @return IpAddressCollection
      */
-    public function fetch(int $userID): IPAddressCollection
+    public function fetch(int $userID): IpAddressCollection
     {
         $ipAddress = IPAddress::where("user_id", $userID)
                                 ->latest()
                                 ->get();
-        return new IPAddressCollection($ipAddress);
+        return new IpAddressCollection($ipAddress);
     }
 
     /**
