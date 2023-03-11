@@ -41,22 +41,7 @@ parameters:
 			path: app/Http/Resources/BaseCollection.php
 
 		-
-			message: "#^Method App\\\\Models\\\\IPAddress\\:\\:user\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsTo does not specify its types\\: TRelatedModel, TChildModel$#"
-			count: 1
-			path: app/Models/IPAddress.php
-
-		-
 			message: "#^Class App\\\\Models\\\\AuditLogs not found\\.$#"
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: "#^Method App\\\\Models\\\\User\\:\\:auditLogs\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel$#"
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: "#^Method App\\\\Models\\\\User\\:\\:ipAddresses\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel$#"
 			count: 1
 			path: app/Models/User.php
 
