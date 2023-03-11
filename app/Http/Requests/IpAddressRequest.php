@@ -38,7 +38,7 @@ class IPAddressRequest extends BaseAPIFormRequest
     public function messages()
     {
         return [
-            "ip_address.ip" => "Please use correct IP Address"
+            "ip_address.ip" => "Invalid input! Please enter a valid IP address."
         ];
     }
 }

@@ -43,6 +43,7 @@ class IPAddressService implements IPAddressServiceInterface
     /**
      * @param User $user
      * @param array $requestData
+     * @param IPAddress $ipAddress
      * @return IPAddress
      */
     public function modifyFetch(User $user, array $requestData, IPAddress $ipAddress): IPAddress

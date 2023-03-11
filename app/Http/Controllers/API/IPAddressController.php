@@ -24,7 +24,7 @@ class IPAddressController extends BaseController
     */
     public function index(): IpAddressCollection | JsonResponse
     {
-        // Try to fetch the IP addresses for the currently authenticated user.
+        // Try to fetch all IP addresses for the current authenticated user.
         try {
             $ipAddresses = $this->ipService->fetch(auth()->user()->id);
             return $this->successResponse('IP addresses fetched successfully', $ipAddresses);
@@ -37,14 +37,14 @@ class IPAddressController extends BaseController
 
     /**
      * @param IPAddressRequest $request
-     * @return void
+     * @return IPAddressResource | JsonResponse
      */
     public function store(IPAddressRequest $request): IPAddressResource | JsonResponse
     {
         // Try to create a new IP address for the currently authenticated user using the validated data from the request.
         try {
             $ipAddress = $this->ipService->create(auth()->user(), $request->validated());
-            return $this->successResponse('IP addresses stored successfully', $this->convertToResource($ipAddress));
+            return $this->successResponse("IP addresses stored successfully", $this->convertToResource($ipAddress));
         } catch (QueryException $e) {
             // If there was an error creating the IP address (e.g. a database error), log the error and return an error response.
             Log::error("Database query failed: {$e->getMessage()}");
@@ -53,14 +53,35 @@ class IPAddressController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param IpAddress $ipAddress
+     * @return IPAddressResource | JsonResponse
      */
-    public function update(IPAddressRequest $request, IpAddress $ipAddress)
+    public function show(IpAddress $ipAddress): IPAddressResource | JsonResponse
+    {
+        // Try to featch a new IP address for the currently authenticated user using the validated data from the request.
+        try {
+            if(auth()->user()->id != $ipAddress->user_id){
+                return $this->errorResponse("Access denied! You are not authorized to perform this action", Response::HTTP_UNAUTHORIZED);
+            }
+            return $this->successResponse("IP addresses fetched successfully", $this->convertToResource($ipAddress));
+        } catch (QueryException $e) {
+            // If there was an error creating the IP address (e.g. a database error), log the error and return an error response.
+            Log::error("Database query failed: {$e->getMessage()}");
+            return $this->errorResponse("Failed to fetched IP addresses", Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * @param IPAddressRequest $request
+     * @param IpAddress $ipAddress
+     * @return IPAddressResource | JsonResponse
+     */
+    public function update(IPAddressRequest $request, IpAddress $ipAddress): IPAddressResource | JsonResponse
     {
         // Try to create a new IP address for the currently authenticated user using the validated data from the request.
         try {
             $updateData = $this->ipService->modifyFetch(auth()->user(), $request->validated(), $ipAddress);
-            return $this->successResponse('IP addresses updated successfully', $this->convertToResource($updateData));
+            return $this->successResponse("IP addresses updated successfully", $this->convertToResource($updateData));
         } catch (QueryException $e) {
             // If there was an error creating the IP address (e.g. a database error), log the error and return an error response.
             Log::error("Database query failed: {$e->getMessage()}");

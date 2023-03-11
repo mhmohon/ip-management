@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group( function () {
     // logout authenticated  user
     Route::post('/logout',[AuthController::class, 'logout'])->name('api.signout');
     // For IP address Create / Update/ View
-    Route::resource('/ip-address', IPAddressController::class, ['except' => ['create','destroy', 'show', 'edit']]);
+    Route::resource('/ip-address', IPAddressController::class, ['except' => ['create', 'destroy', 'edit']]);
     // For all audit lists
     Route::get('/auditlogs',[AuditLogController::class, 'index'])->name('api.auditlogs');
 });

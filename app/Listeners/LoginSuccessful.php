@@ -22,7 +22,7 @@ class LoginSuccessful
     {
         $data = [
             'event_name' => 'Login',
-            'description' => 'Login successful',
+            'description' => 'You have login to the system',
         ];
         $this->storeAuditLog->handle($data);
     }
