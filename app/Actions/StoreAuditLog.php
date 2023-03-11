@@ -21,8 +21,8 @@ class StoreAuditLog
                 'auditable_id'      => $data['auditable_id'] ?? null,
                 'auditable_type'    => $data['auditable_type'] ?? null,
                 'properties'        => $data['properties'] ?? null,
-                'user_id'           => auth()->user()->id,
-                'user_type'         => get_class(auth()->user()),
+                'user_id'           => auth()->user()->id ?? null,
+                'user_type'         => !empty(auth()->user()) ? get_class(auth()->user()) : null,
             ]);
         } catch (QueryException $e) {
             // If there was an error fetching the IP addresses (e.g. a database error), log the error and return an error response.

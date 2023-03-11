@@ -1,10 +1,6 @@
-<!-- PROJECT LOGO -->
+<!-- PROJECT INFO -->
 <br />
 <div align="center">
-  <a href="#">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">IP Address Management Solution</h3>
 
   <p align="center">
@@ -62,11 +58,11 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 - A token based login feature to the system.
 - User should be able to add, view new IP address with a label to the database.
-     - IP addresses must be validated
-     - Only authenticated user are able add/changes the record of database.
+    - IP addresses must be validated
+    - Only authenticated user are able add/changes the record of database.
 - User should be able to modify only the IP address label.
 - System should have an audit log where all the changes will stored.
-     - The audit trail should be maintained for every login and changes.
+    - The audit trail should be maintained for every login and changes.
 - The application should be designed and built following best practices and design patterns.
 - The application should be well-documented and testable.
 - Write a few test cases to ensure that the API is functioning as expected.
@@ -75,18 +71,18 @@ This section should list any major frameworks/libraries used to bootstrap your p
 ## Roadmap
 
 - [x] Initial project setup with latest laravel 10
-      - [x] Add all the necessary files (Modals, Migration files). 
-      - [x] Install latest laravel sanctum package for authentication.
+    - [x] Add all the necessary files (Modals, Migration files). 
+    - [x] Install latest laravel sanctum package for authentication.
 - [ ] Add Additional Templates
 - [x] Add Login & logout feature
-      - [ ] Write test cases for login & logout feature
-- [ ] Add CRU feature for IP address
+    - [ ] Write test cases for login & logout feature
+- [x] Add CRU feature for IP address
     - [ ] Complete the frontend Design module
-    - [ ] Validated the IP address
+    - [x] Validated the IP address
     - [ ] Write test cases for this feature
-- [ ] Add Audit feature to the system
+- [x] Add Audit feature to the system
     - [ ] Complete the frontend Design module
-    - [ ] Add Audit logs for logic and change actions
+    - [x] Add Audit logs for logic and change actions
     - [ ] Write test cases for to show audit logs
 - [ ] Update the readme file with proper project setup guidline
 

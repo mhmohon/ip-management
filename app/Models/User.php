@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(IPAddress::class);
     }
+
+    public function auditLogs(): HasMany
+    {
+        return $this->hasMany(AuditLogs::class);
+    }
 }

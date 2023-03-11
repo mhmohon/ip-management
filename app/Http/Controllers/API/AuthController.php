@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\LoginRequest;
 use App\Services\Contracts\AuthServiceInterface;
-use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;

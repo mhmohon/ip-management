@@ -25,9 +25,9 @@ class BaseAPIFormRequest extends FormRequest
     public function failedValidation(Validator $validator): JsonResponse
     {
         throw new HttpResponseException(response()->json([
-            'code'      => Response::HTTP_UNPROCESSABLE_ENTITY,
             'success'   => false,
-            'message'   => 'Validation erros',
+            'status'    => Response::HTTP_UNPROCESSABLE_ENTITY,
+            'message'   => 'Validation errors',
             'errors'    => $validator->errors(),
             'timestamp' => now()
         ], Response::HTTP_UNPROCESSABLE_ENTITY));

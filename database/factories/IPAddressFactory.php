@@ -3,9 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\IPAddress;
+use App\Models\User;
 use App\Traits\IPAddressTrait;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -31,6 +31,9 @@ class IPAddressFactory extends Factory
         return [
             'label'         => fake()->sentence(2),
             'ip_address'    => $this->convertToBinary(fake()->ipv4()),
+            'user_id'       => function() {
+                return User::inRandomOrder()->first()->id;
+            },
         ];
     }
 }
