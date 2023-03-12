@@ -69,7 +69,7 @@ This project is build with these technologies.
 Before you can run this Laravel project, you'll need to install the following software:
 
 - PHP v8.1 or later
-- Compo- ser v2.5.4 or later
+- Composer v2.5.4 or later
 - Laravel v10.0 or later
 - MySQL
 - npm v8.5.1 or later

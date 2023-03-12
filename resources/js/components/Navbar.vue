@@ -4,7 +4,7 @@
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-4 flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
                 <div class="flex justify-between items-center pl-5">
                     <div>
-                        <a class="text-blue-500 md:text-2xl" href="#">IP <span class="text-white text-xl font-bold md:text-xl">Management</span></a>
+                        <span class="text-blue-500 md:text-2xl" href="#">IP <span class="text-white text-xl font-bold md:text-xl">Management</span></span>
                     </div>
                     <div>
                         <button type="button" @click="isOpen = !isOpen" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">

@@ -31,7 +31,6 @@ class AuthController extends BaseController
             }
             return $this->errorResponse( "Unauthorised! Credentials do not match", Response::HTTP_UNAUTHORIZED);
         } catch (QueryException $e) {
-            // If there was an error fetching the IP addresses (e.g. a database error), log the error and return an error response.
             Log::error("Database query failed: {$e->getMessage()}");
             return $this->errorResponse("Failed to sign in", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -49,7 +48,6 @@ class AuthController extends BaseController
             }
             return $this->errorResponse("Failed to signed out", Response::HTTP_UNAUTHORIZED);
         } catch (QueryException $e) {
-            // If there was an error fetching the IP addresses (e.g. a database error), log the error and return an error response.
             Log::error("Database query failed: {$e->getMessage()}");
             return $this->errorResponse("Failed to sign in", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
