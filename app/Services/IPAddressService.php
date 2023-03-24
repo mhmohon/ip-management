@@ -33,7 +33,7 @@ class IPAddressService implements IPAddressServiceInterface
     {
         $ipAddress = $user->ipAddresses()->create([
             'label'         => $requestData['label'],
-            'ip_address'    => $this->convertToBinary($requestData['ip_address']),
+            'ip_address'    => $requestData['ip_address'],
         ]);
         return $ipAddress;
     }

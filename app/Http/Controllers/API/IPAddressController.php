@@ -24,13 +24,10 @@ class IPAddressController extends BaseController
     */
     public function index(): JsonResponse
     {
-        try {
+        return $this->tryCatchBlock(function(){
             $ipAddresses = $this->ipService->fetch(auth()->user()->id);
             return $this->successResponse('IP addresses fetched successfully', $ipAddresses);
-        } catch (QueryException $e) {
-            Log::error("Database query failed: {$e->getMessage()}");
-            return $this->errorResponse("Failed to fetch IP addresses", Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        });
     }
 
     /**

@@ -19,7 +19,7 @@ class IPAddressResource extends JsonResource
         return [
             'id' => $this->id,
             'label' => $this->label,
-            'ip_address' => $this->convertToReadable($this->ip_address),
+            'ip_address' => $this->ip_address,
             'created_at' => $this->created_at->format('d/m/Y'),
             'updated_at' => $this->updated_at->format('d/m/Y'),
         ];
